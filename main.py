@@ -1,7 +1,7 @@
 # Estamos utilizando o sistema internacional de medidas
 
 # Constantes:
-from math import cos
+from math import cos, pi
 from time import sleep
 from xml.etree.ElementTree import PI
 
@@ -28,37 +28,50 @@ Digite ENTER para continuar com os cálculos
 """)
 
 def calcPolarizai0(ang1, ang2, ang3, i0):
+  if ang1==90: ang1 = cos((ang1*pi)/180)
+  else: ang1=ang1
+
   i1 = i0/2
-  # Está dando erro nesta linha de baixo "unsupported operand type(s) for *: 'float' and 'function'"
-  i2 = ((cos((ang2 - ang1)*PI/180))**2)*i1 
-  i3 = ((cos((ang3 - ang2)*PI/180))**2)*i2 
-  if i3 == i2:
-    pass;
+  i2 = (cos(((ang2 - ang1)*pi)/180)**2) * i1
+  i3 = (cos(((ang3 - ang2)*pi)/180)**2) * i2
+  if ang3 == 0:
+    print(f'Intensidade 1: {i1:.3}\nIntensidade 2: {i2:.3}')
+  else:
+    print(f'Intensidade 1: {i1:.3} W/m^2\nIntensidade 2: {i2:.3} W/m^2\nIntensidade 3: {i3:.3} W/m^2')
   
 
 def calcPolarizai1(ang1, ang2, ang3, i1):
+  if ang1==90: ang1 = cos((ang1*pi)/180)
+  else: ang1=ang1
+
   i0 = 2*i1
-  # Está dando erro nesta linha de baixo "unsupported operand type(s) for *: 'float' and 'function'"   ¯\_(ツ)_/¯ ???
-  i2 = i1*((cos((ang2 - ang1)*PI/180))**2)
-  i3 = i2*((cos((ang3 - ang2)*PI/180))**2)
-  if i3 == i2:
-    pass;
+  i2 = i1*((cos((ang2 - ang1)*pi/180))**2)
+  i3 = i2*((cos((ang3 - ang2)*pi/180))**2)
+  if ang3 == 0:
+    print(f'Intensidade inicial: {i0:.3}\nIntensidade 2: {i2:.3}')
+  else:
+    print(f'Intensidade inicial: {i0:.3} W/m^2\nIntensidade 2: {i2:.3} W/m^2\nIntensidade 3: {i3:.3} W/m^2')
 
 def calcPolarizai2(ang1, ang2, ang3, i2):
-  # Está dando erro nesta linha de baixo "unsupported operand type(s) for *: 'float' and 'function'"  ¯\_(ツ)_/¯ ???
-  i1 = i2/(cos((ang2 - ang1)*PI/180)**2)
+  if ang1==90: ang1 = cos((ang1*pi)/180)
+  else: ang1=ang1
+
+  i1 = i2/(cos((ang2 - ang1)*pi/180)**2)
   i0 = 2*i1
-  i3 = i2*((cos((ang3 - ang2)*PI/180))**2) 
-  if i3 == i2:
-    pass;
+  i3 = i2*((cos((ang3 - ang2)*pi/180))**2) 
+  if ang3 == 0:
+    print(f'Intensidade 0: {i0:.3}\nIntensidade 1: {i1:.3}')
+  else:
+    print(f'Intensidade inicial: {i0:.3} W/m^2\nIntensidade 1: {i1:.3} W/m^2\nIntensidade 3: {i3:.3} W/m^2')
 
 def calcPolarizai3(ang1, ang2, ang3, i3):
-  # Está dando erro nesta linha de baixo "unsupported operand type(s) for *: 'float' and 'function'"  ¯\_(ツ)_/¯ ???
-  i2 = i3/(cos((ang3 - ang2)*PI/180)**2)
-  i1 = i2/(cos((ang2 - ang1)*PI/180)**2)
-  i0 = 2*i1
-  pass;
+  if ang1==90: ang1 = cos((ang1*pi)/180)
+  else: ang1=ang1
 
+  i2 = i3/(cos((ang3 - ang2)*pi/180)**2)
+  i1 = i2/(cos((ang2 - ang1)*pi/180)**2)
+  i0 = 2*i1
+  print(f'Intensidade inicial: {i0:.3} W/m^2\nIntensidade 1: {i1:.3} W/m^2\nIntensidade 2: {i2:.3} W/m^2')
 
 while True:
   print("\n--------------------Menu--------------------")
@@ -85,23 +98,20 @@ while True:
   elif option == '1':
     ang1 = float(input("Digite o ângulo do primeiro polarizador [em graus]:"))
     ang2 = float(input("Digite o ângulo do segundo polarizador [em graus]:"))
-    ang3 = ang2 
     i0 = float(input("Intensidade inicial (i0) [W/m^2]: "))
-    calcPolarizai0(ang1, ang2, ang3, i0)
+    calcPolarizai0(ang1, ang2, 0, i0)
     message()
   elif option == '2':
     ang1 = float(input("Digite o ângulo do primeiro polarizador [em graus]:"))
     ang2 = float(input("Digite o ângulo do segundo polarizador [em graus]:"))
-    ang3 = ang2 
     i1 = float(input("Intensidade (i1) [W/m^2]: "))
-    calcPolarizai1(ang1, ang2, ang3, i1)
+    calcPolarizai1(ang1, ang2, 0, i1)
     message()
   elif option == '3':
     ang1 = float(input("Digite o ângulo do primeiro polarizador [em graus]:"))
     ang2 = float(input("Digite o ângulo do segundo polarizador [em graus]:"))
-    ang3 = ang2 
     i2 = float(input("Intensidade (i2) [W/m^2]: "))
-    calcPolarizai2(ang1, ang2, ang3, i2)
+    calcPolarizai2(ang1, ang2, 0, i2)
     message()
   elif option == '4':
     ang1 = float(input("Digite o ângulo do primeiro polarizador [em graus]:"))
