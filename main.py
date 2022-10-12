@@ -16,7 +16,11 @@ Vinicius Alves Pedro 22.221.036-1
 
 # Exibe descrição do projeto:
 print("""
-
+Este código desenvolvido na linguagem Python explora o tema da física óptica da polarização da luz. 
+Para a utilização do programa, primeiramente deve-se escolher entre as opções mostradas no menu, respondendo 
+com o número correspondente ao cálculo desejado, e então as entradas requeridas, que variam de acordo
+com a opção. Desse modo, o programa é capaz de calcular a intensidade em todas as etapas com dois a 
+três polarizadores.
 """)
 
 
